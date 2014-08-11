@@ -13,7 +13,6 @@ class Stack(object):
     def pop(self):
         if self.is_empty():
             raise IndexError('stack is empty')
-        self.size -= 1
         return self.list.pop()
 
     def top(self):
@@ -22,7 +21,7 @@ class Stack(object):
         return self.list[-1]
 
     def is_empty(self):
-        return self.list = []
+        return self.list == []
 
     def size(self):
         return len(self.list)
