@@ -6,18 +6,28 @@ class Queue(object):
 
     def __init__(self):
         self.list = []
-        self.size = 0
 
     def enqueue(self, item):
         self.list.append(item)
-        self.size += 1
 
     def dequeue(self):
-        self.size -= 1
         return self.list.pop(0)
 
     def is_empty(self):
-        return self.size == 0
+        return self.list == []
 
     def size(self):
-        return self.size
+        return len(self.list)
+
+if __name__ == '__main__':
+    a = Queue()
+    a.enqueue('a')
+    a.enqueue('b')
+    a.enqueue('c')
+    a.enqueue('d')
+    print(a.dequeue())
+    print(a.dequeue())
+    print(a.size(), a.is_empty())
+    print(a.dequeue())
+    print(a.dequeue())
+    print (a.is_empty())

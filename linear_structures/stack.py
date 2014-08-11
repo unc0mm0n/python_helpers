@@ -1,37 +1,40 @@
 class Stack(object):
     '''
-        A basic implementation of a queue using lists
-        O(1) addition, O(n) removal
+        A basic implementation of a stack using lists
+        O(1) addition, O(1) removal
     '''
 
     def __init__(self):
         self.list = []
-        self.size = 0
 
     def push(self, item):
         self.list.append(item)
-        self.size += 1
 
     def pop(self):
-        if self.size == 0:
+        if self.is_empty():
             raise IndexError('stack is empty')
         self.size -= 1
-        return self.list.pop(0)
+        return self.list.pop()
 
     def top(self):
-        if self.size == 0:
+        if self.is_empty():
             raise IndexError('stack is empty')
         return self.list[-1]
 
     def is_empty(self):
-        return self.size == 0
+        return self.list = []
 
     def size(self):
-        return self.size
+        return len(self.list)
 
 if __name__ == '__main__':
     a = Stack()
     a.push('a')
+    a.push('b')
+    a.push('c')
     print(a.top())
     print(a.pop())
-    print(a.top())
+    try:
+        print(a.top())
+    except IndexError:
+        print('yey, excepted!')
