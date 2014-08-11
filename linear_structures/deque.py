@@ -8,6 +8,9 @@ class Deque(object):
     def __init__(self):
         self.list = []
 
+    def __str__(self):
+        return str(self.list)
+
     def add_front(self, item):
         self.list.append(item)
 
@@ -37,6 +40,4 @@ if __name__ == '__main__':
     a.add_front('c')
     a.add_rear('d')
     print(a.remove_rear())
-    print(a.remove_rear())
-    print(a.remove_front())
-    print(a.remove_front())
+    print(a)

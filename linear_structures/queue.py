@@ -7,6 +7,9 @@ class Queue(object):
     def __init__(self):
         self.list = []
 
+    def __str__(self):
+        return str(self.list)
+
     def enqueue(self, item):
         self.list.append(item)
 

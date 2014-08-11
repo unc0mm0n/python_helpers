@@ -7,6 +7,9 @@ class Stack(object):
     def __init__(self):
         self.list = []
 
+    def __str__(self):
+        return str(self.list)
+
     def push(self, item):
         self.list.append(item)
 
