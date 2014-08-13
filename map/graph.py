@@ -4,34 +4,39 @@ class Graph(object):
 
     def __init__(self, vertices = None, connected = False):
         ''' A graph of vertices and edges between them. Doesn't hold any information on represantation
-                vertices => a set of initial vertices
+                vertices => a list of initial vertices
                 connected => if true connect all vertices to eachother
         '''
-        if vertices == None:
-            vertices = set()
-        self.vertices = set(vertices)
 
-        self.edges = defaultdict(set)
+        self.edges = defaultdict(list)
 
         if connected:
-            self.connect_vertices(*vertices)
+            self.connect_vertices(vertices)
+        else:
+            for vert in vertices:
+                self.connect_vertices((vert,))
+
+    def __contains__(self, key):
+        return key in self.edges
 
     def __str__(self):
-        res = 'Graph:\n'
-        for vertice in self.vertices:
+        res = '{}\n'.format(self.__class__.__name__)
+        for vertice in self.edges:
             edges = self.edges[vertice]
-            res += '{0} => {1}\n'.format(vertice, ', '.join(edges))
+            res += '{0} => {1}\n'.format(vertice, edges)
         return res
 
     # Creates edges between each vertice given as an argument
     # Adding them as new vertices if they do not exist
-    def connect_vertices(self, *vertices):
-        vertices = set(vertices)
+    def connect_vertices(self, vertices):
         for vertice in vertices:
             # Add every vertice not already present
-            if vertice not in self.vertices:
-                self.vertices = self.vertices.union(vertice)
-            self.edges[vertice] = self.edges[vertice].union(vertices - set(vertice))
+            for vert in vertices:
+                if vert != vertice and vert not in self.edges[vertice]:
+                    self.edges[vertice].append(vert)
+
+            if not self.edges[vertice]:
+                self.edges[vertice] = []
 
     def neighbours(self,vertice):
         return self.edges[vertice]
